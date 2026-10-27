@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>V2VPN 安卓直装包 · 无需 Google Play</title>
+<meta name="description" content="V2VPN 官方完整安装包，单个 APK 文件，没有 Google Play 商店也能直接安装。">
+<meta name="theme-color" content="#0b0f16">
+<link rel="icon" href="icon.png">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+  --bg:#0b0f16; --card:#141a24; --card2:#1a2230;
+  --line:rgba(255,255,255,.08);
+  --tx:#eef2f8; --tx2:#93a1b8; --tx3:#5f6d82;
+  --cy:#38b6d6; --pk:#f2609f;
+}
+html,body{background:var(--bg);color:var(--tx);
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Noto Sans SC","Segoe UI",Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased;line-height:1.5;overflow-x:hidden}
+body{min-height:100vh;padding:0 18px 64px;max-width:560px;margin:0 auto;position:relative}
+
+/* 背景光斑 */
+body::before,body::after{content:"";position:fixed;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:0}
+body::before{width:340px;height:340px;background:rgba(56,182,214,.20);top:-140px;left:-110px}
+body::after{width:320px;height:320px;background:rgba(242,96,159,.16);top:60px;right:-140px}
+.wrap{position:relative;z-index:1}
+
+/* 头部 */
+header{padding:56px 0 30px;text-align:center}
+.icon{width:88px;height:88px;border-radius:22px;display:block;margin:0 auto 20px;
+  box-shadow:0 12px 34px -8px rgba(56,182,214,.45),0 0 0 1px rgba(255,255,255,.09)}
+h1{font-size:27px;font-weight:680;letter-spacing:-.4px}
+h1 .v{background:linear-gradient(96deg,var(--cy),var(--pk));-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:var(--tx2);font-size:14px;margin-top:9px}
+.badge{display:inline-block;margin-top:15px;padding:5px 13px;border-radius:999px;font-size:12.5px;
+  color:#7fe3c0;background:rgba(60,220,160,.10);border:1px solid rgba(60,220,160,.22)}
+
+/* 下载按钮 */
+.dl{display:block;margin:26px 0 10px;padding:19px 20px;border-radius:17px;text-decoration:none;
+  background:linear-gradient(96deg,var(--cy),var(--pk));color:#08121a;font-weight:700;font-size:17px;
+  text-align:center;box-shadow:0 14px 30px -12px rgba(56,182,214,.72);
+  transition:transform .14s ease,box-shadow .14s ease}
+.dl:active{transform:scale(.975);box-shadow:0 8px 18px -10px rgba(56,182,214,.6)}
+.dl small{display:block;font-weight:500;font-size:12.5px;opacity:.72;margin-top:4px}
+.meta{text-align:center;color:var(--tx3);font-size:12.5px;letter-spacing:.2px}
+
+/* 卡片 */
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin-top:18px}
+.card h2{font-size:14px;font-weight:640;color:var(--tx);margin-bottom:13px;display:flex;align-items:center;gap:8px}
+.card h2::before{content:"";width:3px;height:14px;border-radius:2px;background:linear-gradient(var(--cy),var(--pk))}
+
+/* 三点优势 */
+.perks{display:grid;gap:11px}
+.perk{display:flex;gap:11px;align-items:flex-start;font-size:14px;color:#d3dbe8}
+.perk b{color:var(--tx);font-weight:620}
+.perk i{flex:0 0 auto;width:19px;height:19px;border-radius:50%;margin-top:2px;
+  background:rgba(56,182,214,.14);color:var(--cy);font-style:normal;font-size:11px;
+  display:grid;place-items:center;font-weight:700}
+
+/* 步骤 */
+.steps{counter-reset:s;display:grid;gap:14px}
+.step{display:flex;gap:12px;font-size:14px;color:#c7d1e0}
+.step::before{counter-increment:s;content:counter(s);flex:0 0 auto;width:22px;height:22px;border-radius:50%;
+  background:var(--card2);border:1px solid var(--line);color:var(--tx2);font-size:12px;
+  display:grid;place-items:center;font-weight:600}
+.step b{color:var(--tx);font-weight:620}
+.tip{margin-top:13px;padding:11px 13px;border-radius:10px;font-size:12.5px;line-height:1.55;
+  color:#f0c98a;background:rgba(240,180,80,.08);border:1px solid rgba(240,180,80,.18)}
+
+/* 技术信息 */
+table{width:100%;border-collapse:collapse;font-size:13px}
+td{padding:8px 0;border-bottom:1px solid rgba(255,255,255,.05);vertical-align:top}
+tr:last-child td{border-bottom:0}
+td:first-child{color:var(--tx3);width:88px;white-space:nowrap}
+td:last-child{color:#cfd8e6;word-break:break-all;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px}
+.hash{font-size:11px;line-height:1.6;color:#8fa0b8}
+
+/* 镜像 */
+.mirrors{display:grid;gap:9px}
+.mirrors a{display:flex;justify-content:space-between;align-items:center;gap:12px;
+  padding:12px 14px;border-radius:11px;background:var(--card2);border:1px solid var(--line);
+  color:#cbd5e4;text-decoration:none;font-size:13.5px;transition:border-color .14s}
+.mirrors a:active{border-color:rgba(56,182,214,.5)}
+.mirrors a span{color:var(--tx3);font-size:11.5px;flex:0 0 auto}
+
+footer{margin-top:34px;text-align:center;color:var(--tx3);font-size:11.5px;line-height:1.9}
+footer a{color:#7b8aa0;text-decoration:none;border-bottom:1px dotted #3d4b60}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <img class="icon" src="icon.png" alt="V2VPN">
+  <h1><span class="v">V2VPN</span> 安卓直装包</h1>
+  <p class="sub">一个文件，直接安装。没有 Google Play 也能用。</p>
+  <div class="badge">✓ 官方原版签名 · 未做任何修改</div>
+</header>
+
+<a class="dl" href="https://github.com/qiuyuxiaoc-byte/v2vpn-share/releases/latest/download/V2VPN-26.10.21.apk">
+  下载 APK
+  <small>67.1 MB · v26.10.21 · Android 8.0 以上</small>
+</a>
+<p class="meta">下载速度慢的话，往下拉用备用镜像</p>
+
+<div class="card">
+  <h2>为什么这个能直接装</h2>
+  <div class="perks">
+    <div class="perk"><i>1</i><div><b>单个完整 APK</b>，不是拆分包。点一下就是一个文件，不用额外装什么安装器。</div></div>
+    <div class="perk"><i>2</i><div><b>不需要 Google Play</b>，也不依赖 Google 服务框架。</div></div>
+    <div class="perk"><i>3</i><div><b>全架构通用</b>，arm64 / arm32 / x86 的手机和平板都能装。</div></div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>安装步骤</h2>
+  <div class="steps">
+    <div class="step"><div>点上面的下载按钮，等它下完（手机浏览器会提示保存）。</div></div>
+    <div class="step"><div>下拉通知栏点这个文件，或打开 <b>文件管理 → 下载</b> 找到它，点击。</div></div>
+    <div class="step"><div>如果提示「禁止安装未知应用」，点 <b>设置</b>，把当前浏览器/文件管理的开关打开，再返回点安装。</div></div>
+  </div>
+  <div class="tip">⚠️ 部分手机（小米/OPPO/vivo/华为）会弹「安全警告」或要求关掉「纯净模式」，这是国产系统对所有非商店应用的通告，选「继续安装 / 仍然安装」即可。</div>
+</div>
+
+<div class="card">
+  <h2>文件信息</h2>
+  <table>
+    <tr><td>版本</td><td>26.10.21 (26102101)</td></tr>
+    <tr><td>包名</td><td>com.wrongchao.v2vpn</td></tr>
+    <tr><td>大小</td><td>70,399,918 字节</td></tr>
+    <tr><td>支持系统</td><td>Android 8.0 及以上</td></tr>
+    <tr><td>SHA-256</td><td class="hash">b7273566882b589349968b1e6f7667c42312bbc9196f646f67b4b41b78f278e0</td></tr>
+  </table>
+</div>
+
+<div class="card">
+  <h2>备用镜像（国内更快）</h2>
+  <div class="mirrors">
+    <a href="https://ghfast.top/https://github.com/qiuyuxiaoc-byte/v2vpn-share/releases/latest/download/V2VPN-26.10.21.apk">ghfast.top<span>镜像 1</span></a>
+    <a href="https://ghproxy.net/https://github.com/qiuyuxiaoc-byte/v2vpn-share/releases/latest/download/V2VPN-26.10.21.apk">ghproxy.net<span>镜像 2</span></a>
+    <a href="https://gh-proxy.com/https://github.com/qiuyuxiaoc-byte/v2vpn-share/releases/latest/download/V2VPN-26.10.21.apk">gh-proxy.com<span>镜像 3</span></a>
+    <a href="https://gh.llkk.cc/https://github.com/qiuyuxiaoc-byte/v2vpn-share/releases/latest/download/V2VPN-26.10.21.apk">gh.llkk.cc<span>镜像 4</span></a>
+  </div>
+</div>
+
+<footer>
+  安装包取自官方站点 v2vpn.app，未做任何改动。<br>
+  有问题看 <a href="https://v2vpn.app" target="_blank" rel="noopener">官网</a> · 仅作分享用途
+</footer>
+
+</div>
+</body>
+</html>
